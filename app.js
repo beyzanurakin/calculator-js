@@ -6,6 +6,7 @@ function calculator() {
   const equalButton = document.querySelector("[data-equals]");
   const deleteButton = document.querySelector("[data-delete]");
   const clearButton = document.querySelector("[data-all-clear]");
+  const error = "You cant divide by 0";
 
   let previousText = document.querySelector("[data-previous]");
   let currentText = document.querySelector("[data-current]");
@@ -18,7 +19,7 @@ function calculator() {
     //number buttons
     NumberButtons.map((btn) => {
       btn.addEventListener("click", () => {
-        currentOperand === "You cant divide by 0" ? (currentOperand = "") : "";
+        currentOperand === error ? (currentOperand = "") : "";
         currentOperand === 0 ? (currentOperand = "") : "";
         currentOperand = currentOperand.toString();
         if (btn.textContent === "." && currentOperand.includes(".")) return;
@@ -38,7 +39,7 @@ function calculator() {
     //delete button
     deleteButton.addEventListener("click", () => {
       let temp;
-      if (currentOperand === "You cant divide by 0") {
+      if (currentOperand === error) {
         currentOperand = 0;
         temp = currentOperand;
       } else {
@@ -87,7 +88,7 @@ function calculator() {
       : operation === "*"
       ? (result = prev * curr)
       : operation === "÷" && curr === 0
-      ? (result = "You cant divide by 0")
+      ? (result = error)
       : operation === "÷"
       ? (result = prev / curr)
       : "";
